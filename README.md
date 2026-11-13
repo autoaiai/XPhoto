@@ -13,6 +13,7 @@
 [下载安装包](https://github.com/autoaiai/XPhoto/releases/latest) ·
 [使用手册](https://autoaiai.com/xphoto/help/help.html) ·
 [旧版本](https://github.com/autoaiai/XPhoto/releases) ·
+[多平台实验版](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross) ·
 [更新说明](#版本记录)
 
 `v1.1.9` · Windows 10 / 11（x64）· 8 种界面语言 · 安装包约 113 MB
@@ -53,6 +54,31 @@ Photoshop、磨皮插件、抠图网站、寸照排版工具之间来回倒文�
 > 自 v1.1.7 起只发布 NSIS 安装版，不再提供便携版；Release 附件名统一用 ASCII。
 
 安装包**自带 VC++ 运行库**，不依赖系统里装的是哪个版本——那正是早期「打开图片就崩」的根因。
+
+### 其它平台（v1.1.9 实验构建）
+
+这一批放在 [v1.1.9-cross 预发布](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross)，
+在同一台 Windows 主机上交叉构建，**不是正式发行版**。正式版本仍是上面的 Windows x64 NSIS 安装包。
+
+| 平台 | 文件 | 说明 |
+| --- | --- | --- |
+| Windows ARM64 | `XPhoto-1.1.9-win-arm64.exe` | NSIS 安装包，自带 ARM64 VC++ 运行库 |
+| Linux x64 / ARM64 | `XPhoto-1.1.9-linux-x64.tar.gz`、`XPhoto-1.1.9-linux-arm64.tar.gz` | 已修可执行位，解压后 `./XPhoto` 启动 |
+| macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip` | 未签名 zip，见下方注意 |
+| macOS Intel | `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | 同上，且**没有 AI 抠图 / 分割 / 降噪** |
+
+已知限制，如实列出：
+
+- **macOS 包未签名、未公证、未经 Mac 真机验证**，没有 dmg。首次打开先在 Mac 上执行
+  `xattr -cr XPhoto.app && codesign -s - --deep --force XPhoto.app`。
+- Intel Mac 的上游 `onnxruntime-node` 1.30 不带 `darwin/x64` 原生库，该架构的 AI 抠图 / 分割 / 降噪不可用，其余功能正常。
+- Linux 只提供 `tar.gz`；AppImage / deb 需要在真实 Linux 主机上构建。
+- macOS / Linux **没有自动更新**（更新通道只发 Windows NSIS 安装包）。AI 模型权重同样不随包，
+  首次使用在应用内点「下载模型」。
+- Release 里的 `manifest.json` 有每个包的体积与 sha256，下载后建议核对。
+
+如需正式签名的 dmg / AppImage，请在真实 Mac / Linux 主机上用完整源码工程里的
+`scripts/cross-pack.mjs` 重新构建（本公开仓库只放首页说明，不含源码）。
 
 ## 为什么用它
 
@@ -287,6 +313,8 @@ PNG 无损或 JPEG，编码格式跟随你选的后缀（选 `.jpg` 就真的是
   RGB / 红 / 绿 / 蓝 四个通道各存一套控制点，并保留参数曲线页签与分离三项滑杆。
 - 修复全图调色（含点曲线）**没有写进导出图片**的问题；美颜 / 美体滑竿左端统一对齐。
 - 皮肤蒙版改为钢笔路径（贝塞尔锚点），使用手册与仓库首页同步更新；仓库首页新增英文版。
+- 追加 macOS / Linux / Windows ARM64 的 [v1.1.9 实验构建](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross)
+  （独立预发布，macOS 未签名，详见「下载与安装」）。Windows 正式版与自动更新不受影响。
 
 ### v1.1.8
 
