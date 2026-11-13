@@ -14,6 +14,7 @@ color grading, ID photos, AI cutout and object removal all happen in one window 
 [Download installer](https://github.com/autoaiai/XPhoto/releases/latest) ·
 [User manual](https://autoaiai.com/xphoto/help/help.html) ·
 [Older releases](https://github.com/autoaiai/XPhoto/releases) ·
+[Experimental multi-platform builds](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross) ·
 [Changelog](#changelog)
 
 `v1.1.9` · Windows 10 / 11 (x64) · 8 UI languages · installer ≈ 113 MB
@@ -61,6 +62,33 @@ and ID-photo layout tools.
 
 The installer **ships its own VC++ runtime**, independent of whatever version is installed system-wide —
 mismatched runtimes were the real cause of the early "crashes when opening a photo" reports.
+
+### Other platforms (v1.1.9 experimental builds)
+
+These live in the [v1.1.9-cross pre-release](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross).
+They were cross-built on a single Windows machine and are **not official releases**. The official build is
+still the Windows x64 NSIS installer above.
+
+| Platform | File | Notes |
+| --- | --- | --- |
+| Windows ARM64 | `XPhoto-1.1.9-win-arm64.exe` | NSIS installer, ships the ARM64 VC++ runtime |
+| Linux x64 / ARM64 | `XPhoto-1.1.9-linux-x64.tar.gz`, `XPhoto-1.1.9-linux-arm64.tar.gz` | Executable bits fixed; unpack and run `./XPhoto` |
+| macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip` | Unsigned zip, see the notes below |
+| macOS Intel | `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | Same as above, plus **no AI cutout / segmentation / denoise** |
+
+Known limitations, in full:
+
+- **macOS builds are unsigned, unnotarized, and never verified on real Mac hardware.** There is no dmg.
+  Before first launch, run `xattr -cr XPhoto.app && codesign -s - --deep --force XPhoto.app` on the Mac.
+- Upstream `onnxruntime-node` 1.30 ships no `darwin/x64` binary, so on Intel Macs AI cutout, segmentation
+  and denoise are unavailable; everything else works.
+- Linux ships `tar.gz` only; AppImage / deb require a real Linux host.
+- **No auto-update on macOS / Linux** (the update feed only publishes the Windows NSIS installer). AI model
+  weights are not bundled either — use the in-app "Download models" button on first run.
+- `manifest.json` in the release lists every file's size and sha256; please verify after downloading.
+
+For properly signed dmg / AppImage builds, rebuild on a real Mac / Linux host with
+`scripts/cross-pack.mjs` from the full source project (this public repository contains the home page only).
 
 ## Why XPhoto
 
@@ -315,6 +343,9 @@ be left with a visible color seam.
   tracks in the Beauty / Body panels now share one aligned left edge.
 - The skin mask is now a Pen path (Bézier anchors); the user manual and repository home page were updated in
   step, and an English README was added.
+- Added [experimental v1.1.9 builds](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross) for macOS,
+  Linux and Windows ARM64 (separate pre-release; macOS builds are unsigned). The official Windows release and
+  its auto-update feed are unchanged.
 
 ### v1.1.8
 
