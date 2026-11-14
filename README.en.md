@@ -73,6 +73,8 @@ still the Windows x64 NSIS installer above.
 | --- | --- | --- |
 | Windows ARM64 | `XPhoto-1.1.9-win-arm64.exe` | NSIS installer, ships the ARM64 VC++ runtime |
 | Linux x64 / ARM64 | `XPhoto-1.1.9-linux-x64.tar.gz`, `XPhoto-1.1.9-linux-arm64.tar.gz` | Executable bits fixed; unpack and run `./XPhoto` |
+| Debian / Ubuntu x64 | `xphoto_1.1.9_amd64.deb` | `sudo apt install ./xphoto_1.1.9_amd64.deb`; command `xphoto` |
+| Debian / Ubuntu ARM64 | `xphoto_1.1.9_arm64.deb` | Same, `Architecture: arm64` |
 | macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip` | Unsigned zip, see the notes below |
 | macOS Intel | `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | Same as above, plus **no AI cutout / segmentation / denoise** |
 
@@ -85,7 +87,7 @@ Known limitations, in full:
   Before first launch, run `xattr -cr XPhoto.app && codesign -s - --deep --force XPhoto.app` on the Mac.
 - Upstream `onnxruntime-node` 1.30 ships no `darwin/x64` binary, so on Intel Macs AI cutout, segmentation
   and denoise are unavailable; everything else works.
-- Linux ships `tar.gz` only; AppImage / deb require a real Linux host.
+- Linux ships `tar.gz` (portable) and `deb` (Debian / Ubuntu, installs to `/opt/XPhoto`); AppImage requires a real Linux host.
 - **No auto-update on macOS / Linux** (the update feed only publishes the Windows NSIS installer). AI model
   weights are not bundled either — use the in-app "Download models" button on first run.
 - `manifest.json` in the release lists every file's size and sha256; please verify after downloading.
