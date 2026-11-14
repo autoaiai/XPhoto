@@ -76,6 +76,9 @@ still the Windows x64 NSIS installer above.
 | macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip` | Unsigned zip, see the notes below |
 | macOS Intel | `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | Same as above, plus **no AI cutout / segmentation / denoise** |
 
+On macOS the window buttons are the **system traffic lights** (top-left); the Windows-style
+minimize / maximize / close trio is not drawn, and shortcut hints use `⌘`. Windows and Linux are unchanged.
+
 Known limitations, in full:
 
 - **macOS builds are unsigned, unnotarized, and never verified on real Mac hardware.** There is no dmg.
