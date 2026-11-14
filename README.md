@@ -66,16 +66,19 @@ Photoshop、磨皮插件、抠图网站、寸照排版工具之间来回倒文�
 | Linux x64 / ARM64 | `XPhoto-1.1.9-linux-x64.tar.gz`、`XPhoto-1.1.9-linux-arm64.tar.gz` | 已修可执行位，解压后 `./XPhoto` 启动 |
 | Debian / Ubuntu x64 | `xphoto_1.1.9_amd64.deb` | `sudo apt install ./xphoto_1.1.9_amd64.deb`，安装后命令 `xphoto` |
 | Debian / Ubuntu ARM64 | `xphoto_1.1.9_arm64.deb` | 同上，`Architecture: arm64` |
-| macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip` | 未签名 zip，见下方注意 |
-| macOS Intel | `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | 同上，且**没有 AI 抠图 / 分割 / 降噪** |
+| macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64.dmg` | dmg 安装镜像，打开后把 XPhoto 拖进「应用程序」 |
+| macOS Intel | `XPhoto-1.1.9-mac-x64.dmg` | 同上，且**没有 AI 抠图 / 分割 / 降噪** |
+| macOS 备选 | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip`、`XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | dmg 挂载异常时用 zip 解压运行 |
 
 macOS 上窗口按钮走**系统交通灯**（左上角红黄绿），不再画 Windows 那套右上角三键，
 界面里的快捷键提示也换成 `⌘`；Windows 与 Linux 保持原样。
 
 已知限制，如实列出：
 
-- **macOS 包未签名、未公证、未经 Mac 真机验证**，没有 dmg。首次打开先在 Mac 上执行
-  `xattr -cr XPhoto.app && codesign -s - --deep --force XPhoto.app`。
+- **macOS 包未签名、未公证、未经 Mac 真机验证**。两个 dmg 是 HFS+ UDZO 镜像（Windows 主机生成，
+  已校验卷结构与可执行位；内含的 `app.asar` 与同名 zip 逐字节相同）。首次打开仍需执行
+  `xattr -cr /Applications/XPhoto.app && codesign -s - --deep --force /Applications/XPhoto.app`；
+  若 dmg 在本机无法挂载，请改用同名 `-UNSIGNED.zip` 解压运行。
 - Intel Mac 的上游 `onnxruntime-node` 1.30 不带 `darwin/x64` 原生库，该架构的 AI 抠图 / 分割 / 降噪不可用，其余功能正常。
 - Linux 提供 `tar.gz`（免安装）与 `deb`（Debian / Ubuntu，装到 `/opt/XPhoto`）；AppImage 需要在真实 Linux 主机上构建。
 - macOS / Linux **没有自动更新**（更新通道只发 Windows NSIS 安装包）。AI 模型权重同样不随包，
@@ -319,7 +322,7 @@ PNG 无损或 JPEG，编码格式跟随你选的后缀（选 `.jpg` 就真的是
 - 修复全图调色（含点曲线）**没有写进导出图片**的问题；美颜 / 美体滑竿左端统一对齐。
 - 皮肤蒙版改为钢笔路径（贝塞尔锚点），使用手册与仓库首页同步更新；仓库首页新增英文版。
 - 追加 macOS / Linux / Windows ARM64 的 [v1.1.9 实验构建](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross)
-  （独立预发布，macOS 未签名，详见「下载与安装」）。Windows 正式版与自动更新不受影响。
+  （独立预发布，macOS 未签名，详见「下载与安装」）。macOS 另提供 dmg 安装镜像（未签名）。Windows 正式版与自动更新不受影响。
 
 ### v1.1.8
 
