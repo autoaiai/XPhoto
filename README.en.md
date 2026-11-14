@@ -75,16 +75,20 @@ still the Windows x64 NSIS installer above.
 | Linux x64 / ARM64 | `XPhoto-1.1.9-linux-x64.tar.gz`, `XPhoto-1.1.9-linux-arm64.tar.gz` | Executable bits fixed; unpack and run `./XPhoto` |
 | Debian / Ubuntu x64 | `xphoto_1.1.9_amd64.deb` | `sudo apt install ./xphoto_1.1.9_amd64.deb`; command `xphoto` |
 | Debian / Ubuntu ARM64 | `xphoto_1.1.9_arm64.deb` | Same, `Architecture: arm64` |
-| macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip` | Unsigned zip, see the notes below |
-| macOS Intel | `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | Same as above, plus **no AI cutout / segmentation / denoise** |
+| macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64.dmg` | dmg image — open it and drag XPhoto into Applications |
+| macOS Intel | `XPhoto-1.1.9-mac-x64.dmg` | Same as above, plus **no AI cutout / segmentation / denoise** |
+| macOS fallback | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip`, `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | Use the zip if the dmg will not mount |
 
 On macOS the window buttons are the **system traffic lights** (top-left); the Windows-style
 minimize / maximize / close trio is not drawn, and shortcut hints use `⌘`. Windows and Linux are unchanged.
 
 Known limitations, in full:
 
-- **macOS builds are unsigned, unnotarized, and never verified on real Mac hardware.** There is no dmg.
-  Before first launch, run `xattr -cr XPhoto.app && codesign -s - --deep --force XPhoto.app` on the Mac.
+- **macOS builds are unsigned, unnotarized, and never verified on real Mac hardware.** Both dmgs are
+  HFS+ UDZO images built on a Windows host (volume structure and executable bits verified; the embedded
+  `app.asar` is byte-identical to the same-named zip). Before first launch run
+  `xattr -cr /Applications/XPhoto.app && codesign -s - --deep --force /Applications/XPhoto.app`;
+  if the dmg will not mount, fall back to the matching `-UNSIGNED.zip`.
 - Upstream `onnxruntime-node` 1.30 ships no `darwin/x64` binary, so on Intel Macs AI cutout, segmentation
   and denoise are unavailable; everything else works.
 - Linux ships `tar.gz` (portable) and `deb` (Debian / Ubuntu, installs to `/opt/XPhoto`); AppImage requires a real Linux host.
@@ -349,7 +353,8 @@ be left with a visible color seam.
 - The skin mask is now a Pen path (Bézier anchors); the user manual and repository home page were updated in
   step, and an English README was added.
 - Added [experimental v1.1.9 builds](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross) for macOS,
-  Linux and Windows ARM64 (separate pre-release; macOS builds are unsigned). The official Windows release and
+  Linux and Windows ARM64 (separate pre-release; macOS builds are unsigned, with dmg images now included).
+  The official Windows release and
   its auto-update feed are unchanged.
 
 ### v1.1.8
