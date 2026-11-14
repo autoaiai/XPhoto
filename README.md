@@ -67,6 +67,9 @@ Photoshop、磨皮插件、抠图网站、寸照排版工具之间来回倒文�
 | macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip` | 未签名 zip，见下方注意 |
 | macOS Intel | `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | 同上，且**没有 AI 抠图 / 分割 / 降噪** |
 
+macOS 上窗口按钮走**系统交通灯**（左上角红黄绿），不再画 Windows 那套右上角三键，
+界面里的快捷键提示也换成 `⌘`；Windows 与 Linux 保持原样。
+
 已知限制，如实列出：
 
 - **macOS 包未签名、未公证、未经 Mac 真机验证**，没有 dmg。首次打开先在 Mac 上执行
