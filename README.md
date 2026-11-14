@@ -64,6 +64,8 @@ Photoshop、磨皮插件、抠图网站、寸照排版工具之间来回倒文�
 | --- | --- | --- |
 | Windows ARM64 | `XPhoto-1.1.9-win-arm64.exe` | NSIS 安装包，自带 ARM64 VC++ 运行库 |
 | Linux x64 / ARM64 | `XPhoto-1.1.9-linux-x64.tar.gz`、`XPhoto-1.1.9-linux-arm64.tar.gz` | 已修可执行位，解压后 `./XPhoto` 启动 |
+| Debian / Ubuntu x64 | `xphoto_1.1.9_amd64.deb` | `sudo apt install ./xphoto_1.1.9_amd64.deb`，安装后命令 `xphoto` |
+| Debian / Ubuntu ARM64 | `xphoto_1.1.9_arm64.deb` | 同上，`Architecture: arm64` |
 | macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip` | 未签名 zip，见下方注意 |
 | macOS Intel | `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | 同上，且**没有 AI 抠图 / 分割 / 降噪** |
 
@@ -75,7 +77,7 @@ macOS 上窗口按钮走**系统交通灯**（左上角红黄绿），不再画 
 - **macOS 包未签名、未公证、未经 Mac 真机验证**，没有 dmg。首次打开先在 Mac 上执行
   `xattr -cr XPhoto.app && codesign -s - --deep --force XPhoto.app`。
 - Intel Mac 的上游 `onnxruntime-node` 1.30 不带 `darwin/x64` 原生库，该架构的 AI 抠图 / 分割 / 降噪不可用，其余功能正常。
-- Linux 只提供 `tar.gz`；AppImage / deb 需要在真实 Linux 主机上构建。
+- Linux 提供 `tar.gz`（免安装）与 `deb`（Debian / Ubuntu，装到 `/opt/XPhoto`）；AppImage 需要在真实 Linux 主机上构建。
 - macOS / Linux **没有自动更新**（更新通道只发 Windows NSIS 安装包）。AI 模型权重同样不随包，
   首次使用在应用内点「下载模型」。
 - Release 里的 `manifest.json` 有每个包的体积与 sha256，下载后建议核对。
