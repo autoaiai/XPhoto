@@ -61,7 +61,7 @@ Photoshop、磨皮插件、抠图网站、寸照排版工具之间来回倒文�
 | Linux x64 / ARM64 | `XPhoto-1.1.10-linux-x64.AppImage` / `XPhoto-1.1.10-linux-arm64.AppImage` |
 
 Mac 首次打开若提示「已损坏」，在终端执行 `xattr -cr /Applications/XPhoto.app` 即可。
-完整的一页客户版说明见 [`docs/XPhoto-版本选择说明.html`](docs/XPhoto-版本选择说明.html)。
+完整的一页客户版说明见 [`docs/README.md`](docs/README.md)。
 
 - 下载页（认准这里的最新版本）：<https://github.com/autoaiai/XPhoto/releases>
 - 官网与在线手册：<https://autoaiai.com/xphoto/>
@@ -349,7 +349,7 @@ PNG 无损或 JPEG，编码格式跟随你选的后缀（选 `.jpg` 就真的是
   macOS 与 Linux 的 deb / tar.gz 只提示并打开下载页。更新清单按平台分别挑包。
 - 两个 dmg 在 macOS 15.8.3 虚拟机里用 `hdiutil` 生成并通过 `hdiutil verify`；两个 AppImage 在
   Deepin 25 虚拟机里用 `mksquashfs` + 官方 type2 runtime 生成，x64 包已实机启动验证。
-- 新增一页客户版 [下载选择说明](docs/XPhoto-版本选择说明.html)：一句话告诉客户选哪个包。
+- 新增一页客户版 [下载选择说明](docs/README.md)：一句话告诉客户选哪个包。
 
 ### v1.1.9
 
@@ -409,7 +409,7 @@ npm test           # 全量回归（数百项像素级断言，含 i18n / 打包
 
 | 文档 | 内容 |
 | --- | --- |
-| [`docs/XPhoto-版本选择说明.html`](docs/XPhoto-版本选择说明.html) | 一页客户版下载指引：一句话告诉客户选哪个包 |
+| [`docs/README.md`](docs/README.md) | 一页客户版下载指引：一句话告诉客户选哪个包 |
 | [`docs/DEV-NOTES.md`](docs/DEV-NOTES.md) | 开发笔记：每项功能的实测数据、踩过的坑、算法取舍 |
 | [`docs/XPhoto-使用手册.html`](docs/XPhoto-使用手册.html) | 完整使用手册（18 章，可离线打开、可打印） |
 | [`docs/i18n-plan.md`](docs/i18n-plan.md) | 8 语界面方案与脚本 |
