@@ -68,7 +68,7 @@ and ID-photo layout tools.
 | Linux x64 / ARM64 | `XPhoto-1.1.10-linux-x64.AppImage` / `XPhoto-1.1.10-linux-arm64.AppImage` |
 
 If macOS says the app is "damaged" on first launch, run `xattr -cr /Applications/XPhoto.app`.
-A printable one-page guide is in [`docs/XPhoto-版本选择说明.html`](docs/XPhoto-版本选择说明.html).
+A one-page guide is in [`docs/README.md`](docs/README.md).
 
 - Downloads (always use the newest version here): <https://github.com/autoaiai/XPhoto/releases>
 - Website and online manual: <https://autoaiai.com/xphoto/>
@@ -383,7 +383,7 @@ be left with a visible color seam.
 - Both dmgs were produced on a macOS 15.8.3 VM with `hdiutil` and pass `hdiutil verify`; both AppImages
   were built on a Deepin 25 VM with `mksquashfs` plus the official type2 runtime, and the x64 one was
   launched and verified on real hardware.
-- Added a one-page customer guide: [Which installer to download](docs/XPhoto-版本选择说明.html).
+- Added a one-page customer guide: [Which installer to download](docs/README.md).
 
 ### v1.1.9
 
@@ -454,7 +454,7 @@ npm test           # full regression (hundreds of pixel-level assertions, incl. 
 
 | Doc | Contents |
 | --- | --- |
-| [`docs/XPhoto-版本选择说明.html`](docs/XPhoto-版本选择说明.html) | One-page customer guide: which installer to pick, in one line |
+| [`docs/README.md`](docs/README.md) | One-page customer guide: which installer to pick, in one line |
 | [`docs/DEV-NOTES.md`](docs/DEV-NOTES.md) | Developer notes: measured numbers, pitfalls and algorithm trade-offs for every feature |
 | [`docs/XPhoto-使用手册.html`](docs/XPhoto-使用手册.html) | Complete user manual (18 chapters, offline, printable) |
 | [`docs/i18n-plan.md`](docs/i18n-plan.md) | The 8-language UI plan and scripts |
