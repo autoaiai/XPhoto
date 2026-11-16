@@ -4,20 +4,20 @@
 
 [简体中文](README.md) · English
 
-A Windows desktop retouching app for commercial portrait workflows. Skin smoothing, liquify, body shaping,
-color grading, ID photos, AI cutout and object removal all happen in one window —
-**every pixel is processed locally; your photos never leave the machine**.
+A cross-platform desktop retouching app for commercial portrait workflows (Windows / macOS / Linux).
+Skin smoothing, liquify, body shaping, color grading, ID photos, AI cutout and object removal all happen in
+one window — **every pixel is processed locally; your photos never leave the machine**.
 
 ### Website · <https://autoaiai.com/xphoto/>
 
 [Website](https://autoaiai.com/xphoto/) ·
 [Download installer](https://github.com/autoaiai/XPhoto/releases/latest) ·
+[Which one? One line](#which-one) ·
 [User manual](https://autoaiai.com/xphoto/help/help.html) ·
 [Older releases](https://github.com/autoaiai/XPhoto/releases) ·
-[Experimental multi-platform builds](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross) ·
 [Changelog](#changelog)
 
-`v1.1.9` · Windows 10 / 11 (x64) · 8 UI languages · installer ≈ 113 MB
+`v1.1.10` · Windows / macOS / Linux (x64 + ARM64) · 8 UI languages · installers ≈ 110–155 MB
 
 <img src="https://autoaiai.com/xphoto/assets/p1.webp" width="420" alt="XPhoto retouched sample portrait">
 
@@ -53,7 +53,22 @@ and ID-photo layout tools.
 
 | Type | File | Notes |
 | --- | --- | --- |
-| **Installer** | `XPhoto-Setup-<version>.exe` | Choose the install folder; creates Start Menu and desktop shortcuts; supports one-click updates |
+| **Installer** | `XPhoto-<version>-win-x64.exe` | Choose the install folder; creates Start Menu and desktop shortcuts; supports one-click updates |
+
+<a id="which-one"></a>
+
+**Not sure which to pick?** Windows → `win-x64`; Mac → the `dmg` matching your chip; Linux → `AppImage`.
+
+| Your device | Download this |
+| --- | --- |
+| Windows (most PCs) | `XPhoto-1.1.10-win-x64.exe` |
+| Windows Snapdragon / ARM64 | `XPhoto-1.1.10-win-arm64.exe` |
+| Mac (M1 / M2 / M3 / M4) | `XPhoto-1.1.10-mac-arm64.dmg` |
+| Mac (Intel) | `XPhoto-1.1.10-mac-x64.dmg` |
+| Linux x64 / ARM64 | `XPhoto-1.1.10-linux-x64.AppImage` / `XPhoto-1.1.10-linux-arm64.AppImage` |
+
+If macOS says the app is "damaged" on first launch, run `xattr -cr /Applications/XPhoto.app`.
+A printable one-page guide is in [`docs/XPhoto-版本选择说明.html`](docs/XPhoto-版本选择说明.html).
 
 - Downloads (always use the newest version here): <https://github.com/autoaiai/XPhoto/releases>
 - Website and online manual: <https://autoaiai.com/xphoto/>
@@ -63,37 +78,43 @@ and ID-photo layout tools.
 The installer **ships its own VC++ runtime**, independent of whatever version is installed system-wide —
 mismatched runtimes were the real cause of the early "crashes when opening a photo" reports.
 
-### Other platforms (v1.1.9 experimental builds)
+### Other platforms (v1.1.10)
 
-These live in the [v1.1.9-cross pre-release](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross).
-They were cross-built on a single Windows machine and are **not official releases**. The official build is
-still the Windows x64 NSIS installer above.
+The same release also carries macOS / Linux / Windows ARM64 builds. The **dmgs were produced inside a
+macOS 15.8.3 virtual machine and the AppImages inside a Deepin 25 VM** — neither format can be built on
+Windows (dmg needs `sips`/`hdiutil`, AppImage needs `mksquashfs` plus an ELF runtime for the target arch).
 
 | Platform | File | Notes |
 | --- | --- | --- |
-| Windows ARM64 | `XPhoto-1.1.9-win-arm64.exe` | NSIS installer, ships the ARM64 VC++ runtime |
-| Linux x64 / ARM64 | `XPhoto-1.1.9-linux-x64.tar.gz`, `XPhoto-1.1.9-linux-arm64.tar.gz` | Executable bits fixed; unpack and run `./XPhoto` |
-| Debian / Ubuntu x64 | `xphoto_1.1.9_amd64.deb` | `sudo apt install ./xphoto_1.1.9_amd64.deb`; command `xphoto` |
-| Debian / Ubuntu ARM64 | `xphoto_1.1.9_arm64.deb` | Same, `Architecture: arm64` |
-| macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64.dmg` | dmg image — open it and drag XPhoto into Applications |
-| macOS Intel | `XPhoto-1.1.9-mac-x64.dmg` | Same as above, plus **no AI cutout / segmentation / denoise** |
-| macOS fallback | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip`, `XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | Use the zip if the dmg will not mount |
+| Windows ARM64 | `XPhoto-1.1.10-win-arm64.exe` | NSIS installer, ships the ARM64 VC++ runtime (the installer itself is 32-bit NSIS, emulated on ARM64 Windows) |
+| Linux x64 | `XPhoto-1.1.10-linux-x64.AppImage` | **Supports auto-update**: downloads in the background, replaces itself in place, restarts |
+| Linux ARM64 | `XPhoto-1.1.10-linux-arm64.AppImage` | Same; built with an aarch64 runtime, contents are aarch64 |
+| Linux x64 / ARM64 | `XPhoto-1.1.10-linux-*.tar.gz` | Portable, executable bits fixed; unpack and run `./XPhoto` |
+| Debian / Ubuntu x64 | `xphoto_1.1.10_amd64.deb` | `sudo apt install ./xphoto_1.1.10_amd64.deb`; command `xphoto` |
+| Debian / Ubuntu ARM64 | `xphoto_1.1.10_arm64.deb` | Same, `Architecture: arm64` |
+| macOS Apple Silicon | `XPhoto-1.1.10-mac-arm64.dmg` | dmg image — open it and drag XPhoto into Applications |
+| macOS Intel | `XPhoto-1.1.10-mac-x64.dmg` | Same as above, plus **no AI cutout / segmentation / denoise** |
+| macOS fallback | `XPhoto-1.1.10-mac-arm64-UNSIGNED.zip`, `XPhoto-1.1.10-mac-x64-UNSIGNED.zip` | Use the zip if the dmg will not mount |
 
 On macOS the window buttons are the **system traffic lights** (top-left); the Windows-style
 minimize / maximize / close trio is not drawn, and shortcut hints use `⌘`. Windows and Linux are unchanged.
 
 Known limitations, in full:
 
-- **macOS builds are unsigned, unnotarized, and never verified on real Mac hardware.** Both dmgs are
-  HFS+ UDZO images built on a Windows host (volume structure and executable bits verified; the embedded
-  `app.asar` is byte-identical to the same-named zip). Before first launch run
-  `xattr -cr /Applications/XPhoto.app && codesign -s - --deep --force /Applications/XPhoto.app`;
-  if the dmg will not mount, fall back to the matching `-UNSIGNED.zip`.
+- **macOS builds are unsigned and unnotarized.** Both dmgs were created on macOS 15.8.3 and pass
+  `hdiutil verify` (14 symlinks and 15 executable bits preserved, same payload as the matching zip), but
+  the app was **not actually launched on a Mac**. Before first launch run `xattr -cr /Applications/XPhoto.app`.
+  Unsigned bundles also cannot be swapped by Squirrel, which is why macOS gets a "new version available"
+  notice instead of silent self-update.
 - Upstream `onnxruntime-node` 1.30 ships no `darwin/x64` binary, so on Intel Macs AI cutout, segmentation
   and denoise are unavailable; everything else works.
-- Linux ships `tar.gz` (portable) and `deb` (Debian / Ubuntu, installs to `/opt/XPhoto`); AppImage requires a real Linux host.
-- **No auto-update on macOS / Linux** (the update feed only publishes the Windows NSIS installer). AI model
-  weights are not bundled either — use the in-app "Download models" button on first run.
+- Linux `deb` / `tar.gz` **cannot update in place** (deb relies on an apt repo, tar.gz has no install concept);
+  the app only tells you a new version exists and links to the download page. Use the `.AppImage` for auto-update.
+- The AppImage was **launched and verified inside a Deepin 25 VM** (preset sidebar, canvas, beauty panel and
+  the model banner all render). Note that `chrome-sandbox` inside the AppImage is `0755` (the setuid bit is
+  dropped at pack time — it is `4755` in the `tar.gz`), so the sandbox relies on the kernel's unprivileged
+  user namespaces; add `--no-sandbox` if userns is disabled on your system.
+- AI model weights are not bundled — use the in-app "Download models" button on first run.
 - `manifest.json` in the release lists every file's size and sha256; please verify after downloading.
 
 For properly signed dmg / AppImage builds, rebuild on a real Mac / Linux host with
@@ -203,8 +224,9 @@ Four tabs; a missing model gets an inline download button right where it is need
 - **Cutout** — portrait matting to transparent PNG, with two paths: hair-level (RVM) and fine detail (BiRefNet-lite fp16).
 - **Remove** — drag a rectangle over the object and the model fills it in (LaMa); `Esc` cancels the selection.
 - **Segment & denoise** — after portrait segmentation, denoise the whole frame or skin only; removes noise and compression artifacts.
-- **Models** — see what is installed / missing and download one or all; the directory is always writable
-  (`%APPDATA%\portrait-lab\models`), never a read-only install folder.
+- **Models** — see what is installed / missing and download one or all; **models follow the install** and land in
+  a `models` folder next to the app (install on D:, models on D:). If the install folder is read-only it falls
+  back to `%APPDATA%\XPhoto\models`.
 
 GPU inference prefers DirectML; if probing or validation fails it falls back to CPU and the UI states the
 active backend. If the previous run crashed inside the inference library, AI features are disabled with an
@@ -294,8 +316,13 @@ covered and fall back through "current language → English → Chinese", so you
 
 ## Updates
 
-Borrows AICUT's check cadence, but **install timing is adapted for a retouching app**: no countdown auto-install,
-and nothing installed behind your back on exit.
+Three tiers by platform: **Windows (NSIS) and Linux AppImage update automatically**; macOS dmg / zip and
+Linux deb / tar.gz only show a notice and open the download page — an unsigned Mac bundle cannot be replaced
+by Squirrel, and deb / tar.gz have no in-place update concept. The manifest picks the right asset per OS
+and architecture (AppImage over tar / deb, dmg over zip).
+
+The following describes the Windows (NSIS) tier. It borrows AICUT's check cadence, but **install timing is
+adapted for a retouching app**: no countdown auto-install, and nothing installed behind your back on exit.
 
 - Checks 15 seconds after launch, then every 6 hours; 15 seconds after waking from sleep; retries every
   5 minutes on network failure instead of waiting the full 6 hours.
@@ -324,8 +351,9 @@ If the previous run crashed inside the inference library, a circuit breaker prev
 open photos normally, refresh under AI Retouch → Models, or start with `--force-ai` to clear the record.
 
 **AI tools do nothing / models are missing?**
-AI Retouch → Models lists each missing file with a download button. Downloads land in
-`%APPDATA%\portrait-lab\models` (override with `PORTRAIT_MODELS_DIR`).
+AI Retouch → Models lists each missing file with a download button. Downloads land in the `models` folder
+inside the install directory (falls back to `%APPDATA%\XPhoto\models` when that folder is read-only;
+override with `PORTRAIT_MODELS_DIR`).
 
 **Export dimensions are not what I expected?**
 Export always recomputes at the loaded image's original resolution, independent of screen zoom. Two cases are
@@ -342,6 +370,20 @@ full-body skin tone is applied to the whole frame and still covers a disabled fa
 be left with a visible color seam.
 
 ## Changelog
+
+### v1.1.10
+
+- One release now covers **Windows / Linux / macOS on both x64 and ARM64 — 12 installers in total**,
+  all on the official release (`/releases/latest` points at it), not only in a separate pre-release.
+- Installer names are unified as `XPhoto-<version>-<platform>-<arch>.<ext>`. Windows changed from
+  `XPhoto Setup <version>.exe` to `XPhoto-1.1.10-win-x64.exe`, matching every other platform.
+- Auto-update grew to three tiers: Windows NSIS downloads silently and installs at next launch;
+  Linux AppImage replaces itself atomically and restarts; macOS and Linux deb / tar.gz only show a
+  notice and open the download page. The manifest selects assets per platform.
+- Both dmgs were produced on a macOS 15.8.3 VM with `hdiutil` and pass `hdiutil verify`; both AppImages
+  were built on a Deepin 25 VM with `mksquashfs` plus the official type2 runtime, and the x64 one was
+  launched and verified on real hardware.
+- Added a one-page customer guide: [Which installer to download](docs/XPhoto-版本选择说明.html).
 
 ### v1.1.9
 
@@ -412,6 +454,7 @@ npm test           # full regression (hundreds of pixel-level assertions, incl. 
 
 | Doc | Contents |
 | --- | --- |
+| [`docs/XPhoto-版本选择说明.html`](docs/XPhoto-版本选择说明.html) | One-page customer guide: which installer to pick, in one line |
 | [`docs/DEV-NOTES.md`](docs/DEV-NOTES.md) | Developer notes: measured numbers, pitfalls and algorithm trade-offs for every feature |
 | [`docs/XPhoto-使用手册.html`](docs/XPhoto-使用手册.html) | Complete user manual (18 chapters, offline, printable) |
 | [`docs/i18n-plan.md`](docs/i18n-plan.md) | The 8-language UI plan and scripts |
