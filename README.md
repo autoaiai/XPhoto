@@ -4,19 +4,19 @@
 
 [English](README.en.md) · 简体中文
 
-面向商业人像的 Windows 桌面修图软件。磨皮、液化、美体、调色、寸照、AI 抠图与消除在同一个窗口里做完，
+面向商业人像的跨平台桌面修图软件（Windows / macOS / Linux）。磨皮、液化、美体、调色、寸照、AI 抠图与消除在同一个窗口里做完，
 **全部像素处理都在本机，照片不出电脑**。
 
 ### 官网 · <https://autoaiai.com/xphoto/>
 
 [官网](https://autoaiai.com/xphoto/) ·
 [下载安装包](https://github.com/autoaiai/XPhoto/releases/latest) ·
+[选哪个？一句话](#选哪个) ·
 [使用手册](https://autoaiai.com/xphoto/help/help.html) ·
 [旧版本](https://github.com/autoaiai/XPhoto/releases) ·
-[多平台实验版](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross) ·
 [更新说明](#版本记录)
 
-`v1.1.9` · Windows 10 / 11（x64）· 8 种界面语言 · 安装包约 113 MB
+`v1.1.10` · Windows / macOS / Linux（x64 + ARM64）· 8 种界面语言 · 安装包约 110～155 MB
 
 <img src="https://autoaiai.com/xphoto/assets/p1.webp" width="420" alt="XPhoto 精修示例人像">
 
@@ -46,7 +46,22 @@ Photoshop、磨皮插件、抠图网站、寸照排版工具之间来回倒文�
 
 | 类型 | 文件 | 说明 |
 | --- | --- | --- |
-| **安装版** | `XPhoto-Setup-<版本>.exe` | 可选安装目录，自动创建开始菜单与桌面快捷方式，支持一键更新 |
+| **安装版** | `XPhoto-<版本>-win-x64.exe` | 可选安装目录，自动创建开始菜单与桌面快捷方式，支持一键更新 |
+
+<a id="选哪个"></a>
+
+**不知道选哪个？** Windows 电脑选 `win-x64`，苹果电脑选和芯片对应的 `dmg`，Linux 选 `AppImage`。
+
+| 你的设备 | 下载这个文件 |
+| --- | --- |
+| Windows（绝大多数） | `XPhoto-1.1.10-win-x64.exe` |
+| Windows 骁龙 / ARM64 | `XPhoto-1.1.10-win-arm64.exe` |
+| Mac（M1 / M2 / M3 / M4） | `XPhoto-1.1.10-mac-arm64.dmg` |
+| Mac（Intel） | `XPhoto-1.1.10-mac-x64.dmg` |
+| Linux x64 / ARM64 | `XPhoto-1.1.10-linux-x64.AppImage` / `XPhoto-1.1.10-linux-arm64.AppImage` |
+
+Mac 首次打开若提示「已损坏」，在终端执行 `xattr -cr /Applications/XPhoto.app` 即可。
+完整的一页客户版说明见 [`docs/XPhoto-版本选择说明.html`](docs/XPhoto-版本选择说明.html)。
 
 - 下载页（认准这里的最新版本）：<https://github.com/autoaiai/XPhoto/releases>
 - 官网与在线手册：<https://autoaiai.com/xphoto/>
@@ -55,34 +70,39 @@ Photoshop、磨皮插件、抠图网站、寸照排版工具之间来回倒文�
 
 安装包**自带 VC++ 运行库**，不依赖系统里装的是哪个版本——那正是早期「打开图片就崩」的根因。
 
-### 其它平台（v1.1.9 实验构建）
+### 其它平台（v1.1.10）
 
-这一批放在 [v1.1.9-cross 预发布](https://github.com/autoaiai/XPhoto/releases/tag/v1.1.9-cross)，
-在同一台 Windows 主机上交叉构建，**不是正式发行版**。正式版本仍是上面的 Windows x64 NSIS 安装包。
+同一批发布里额外提供 macOS / Linux / Windows ARM64 构建。其中 **dmg 由 macOS 15.8.3 虚拟机生成、
+AppImage 由 Deepin 25 虚拟机生成**——这两种格式在 Windows 上做不出来（dmg 需要 `sips`/`hdiutil`，
+AppImage 需要 `mksquashfs` + 目标架构的 ELF runtime）。
 
 | 平台 | 文件 | 说明 |
 | --- | --- | --- |
-| Windows ARM64 | `XPhoto-1.1.9-win-arm64.exe` | NSIS 安装包，自带 ARM64 VC++ 运行库 |
-| Linux x64 / ARM64 | `XPhoto-1.1.9-linux-x64.tar.gz`、`XPhoto-1.1.9-linux-arm64.tar.gz` | 已修可执行位，解压后 `./XPhoto` 启动 |
-| Debian / Ubuntu x64 | `xphoto_1.1.9_amd64.deb` | `sudo apt install ./xphoto_1.1.9_amd64.deb`，安装后命令 `xphoto` |
-| Debian / Ubuntu ARM64 | `xphoto_1.1.9_arm64.deb` | 同上，`Architecture: arm64` |
-| macOS Apple Silicon | `XPhoto-1.1.9-mac-arm64.dmg` | dmg 安装镜像，打开后把 XPhoto 拖进「应用程序」 |
-| macOS Intel | `XPhoto-1.1.9-mac-x64.dmg` | 同上，且**没有 AI 抠图 / 分割 / 降噪** |
-| macOS 备选 | `XPhoto-1.1.9-mac-arm64-UNSIGNED.zip`、`XPhoto-1.1.9-mac-x64-UNSIGNED.zip` | dmg 挂载异常时用 zip 解压运行 |
+| Windows ARM64 | `XPhoto-1.1.10-win-arm64.exe` | NSIS 安装包，自带 ARM64 VC++ 运行库（安装器是 32 位 NSIS，在 ARM64 Windows 上经模拟运行） |
+| Linux x64 | `XPhoto-1.1.10-linux-x64.AppImage` | **支持自动更新**：应用内后台下载新版 → 原地替换自身 → 重启 |
+| Linux ARM64 | `XPhoto-1.1.10-linux-arm64.AppImage` | 同上（ARM64 runtime 交叉打包，内容为 aarch64） |
+| Linux x64 / ARM64 | `XPhoto-1.1.10-linux-*.tar.gz` | 免安装，已修可执行位，解压后 `./XPhoto` 启动 |
+| Debian / Ubuntu x64 | `xphoto_1.1.10_amd64.deb` | `sudo apt install ./xphoto_1.1.10_amd64.deb`，命令 `xphoto`；deb 无就地更新能力 |
+| Debian / Ubuntu ARM64 | `xphoto_1.1.10_arm64.deb` | 同上，`Architecture: arm64` |
+| macOS Apple Silicon | `XPhoto-1.1.10-mac-arm64.dmg` | dmg 安装镜像，打开后把 XPhoto 拖进「应用程序」 |
+| macOS Intel | `XPhoto-1.1.10-mac-x64.dmg` | 同上，且**没有 AI 抠图 / 分割 / 降噪** |
+| macOS 备选 | `XPhoto-1.1.10-mac-arm64-UNSIGNED.zip`、`XPhoto-1.1.10-mac-x64-UNSIGNED.zip` | dmg 挂载异常时用 zip 解压运行 |
 
 macOS 上窗口按钮走**系统交通灯**（左上角红黄绿），不再画 Windows 那套右上角三键，
 界面里的快捷键提示也换成 `⌘`；Windows 与 Linux 保持原样。
 
 已知限制，如实列出：
 
-- **macOS 包未签名、未公证、未经 Mac 真机验证**。两个 dmg 是 HFS+ UDZO 镜像（Windows 主机生成，
-  已校验卷结构与可执行位；内含的 `app.asar` 与同名 zip 逐字节相同）。首次打开仍需执行
-  `xattr -cr /Applications/XPhoto.app && codesign -s - --deep --force /Applications/XPhoto.app`；
-  若 dmg 在本机无法挂载，请改用同名 `-UNSIGNED.zip` 解压运行。
+- **macOS 包未签名、未公证。** 两个 dmg 均在 macOS 15.8.3 上生成并通过 `hdiutil verify`（含 14 个
+  符号链接、15 个可执行位，与同名 zip 同源）；但**没有在 Mac 上实际启动验证**。首次打开仍需
+  `xattr -cr /Applications/XPhoto.app`；未签名包也无法被 Squirrel 替换，所以 macOS 端不做静默自动更新。
 - Intel Mac 的上游 `onnxruntime-node` 1.30 不带 `darwin/x64` 原生库，该架构的 AI 抠图 / 分割 / 降噪不可用，其余功能正常。
-- Linux 提供 `tar.gz`（免安装）与 `deb`（Debian / Ubuntu，装到 `/opt/XPhoto`）；AppImage 需要在真实 Linux 主机上构建。
-- macOS / Linux **没有自动更新**（更新通道只发 Windows NSIS 安装包）。AI 模型权重同样不随包，
-  首次使用在应用内点「下载模型」。
+- Linux 的 `deb` / `tar.gz` **没有就地更新能力**（`deb` 靠 apt 源，`tar.gz` 没有「安装」概念），
+  应用内只会提示新版本并给下载页；需要自动更新请用 `.AppImage`。
+- AppImage 已在 Deepin 25 虚拟机里**实际启动验证**（预设栏、画布、美颜面板、模型提示横幅都正常渲染）。
+  注意 AppImage 内的 `chrome-sandbox` 是 `0755`（打包时 setuid 位被丢弃，`tar.gz` 里则是 `4755`），
+  因此沙盒依赖内核的 unprivileged user namespaces；若系统禁用了 userns，启动时需加 `--no-sandbox`。
+- macOS / Linux 的 AI 模型权重同样不随包，首次使用在应用内点「下载模型」。
 - Release 里的 `manifest.json` 有每个包的体积与 sha256，下载后建议核对。
 
 如需正式签名的 dmg / AppImage，请在真实 Mac / Linux 主机上用完整源码工程里的
@@ -180,8 +200,8 @@ macOS 上窗口按钮走**系统交通灯**（左上角红黄绿），不再画 
 - **抠图** —— 人像抠图，出透明 PNG；发丝级（RVM）与精细（BiRefNet-lite fp16）两条通道。
 - **消除** —— 在照片上拖一个矩形框选物体，模型补全（LaMa）；`Esc` 取消框选。
 - **分割降噪** —— 人像分割后可整幅降噪或只降皮肤，去噪点与压缩痕迹。
-- **模型** —— 查看已装 / 缺失，单个或全部下载；目录永远是可写位置（`%APPDATA%\portrait-lab\models`），
-  不会往只读的安装目录写。
+- **模型** —— 查看已装 / 缺失，单个或全部下载；**模型跟着软件装**，落在安装文件夹下的 `models`
+  （软件装 D 盘模型就在 D 盘）；安装目录只读时自动回退到 `%APPDATA%\XPhoto\models`。
 
 GPU 优先走 DirectML，探测或验证失败会自动回落 CPU，界面会写明当前在哪个后端。
 若检测到上次崩在推理库，会先停用 AI 功能并提示，避免反复崩。
@@ -270,7 +290,11 @@ PNG 无损或 JPEG，编码格式跟随你选的后缀（选 `.jpg` 就真的是
 
 ## 更新
 
-参考 AICUT 的检查节奏，但**安装时机按修图软件改过**：不倒计时自动装，退出时也不偷偷装。
+三档按平台走：**Windows（NSIS）与 Linux AppImage 会自动更新**；macOS 的 dmg / zip 与 Linux 的 deb / tar.gz
+只会提示新版本并打开下载页——未签名的 Mac 包无法被 Squirrel 替换，deb / tar.gz 也没有原地更新的概念。
+清单按系统与架构分别挑包，AppImage 优先于 tar / deb，dmg 优先于 zip。
+
+下面说的是 Windows（NSIS）那档的节奏，参考 AICUT 但**安装时机按修图软件改过**：不倒计时自动装，退出时也不偷偷装。
 
 - 启动 15 秒后自动检查一次，之后每 6 小时复查；电脑休眠唤醒后 15 秒再查；
   网络失败 5 分钟一拍重试，不会因一次断网拖 6 小时。
@@ -299,8 +323,8 @@ PNG 无损或 JPEG，编码格式跟随你选的后缀（选 `.jpg` 就真的是
 里刷新即可恢复；也可以用 `--force-ai` 启动清掉记录。
 
 **AI 功能点不动 / 模型缺失？**
-「AI 修图 → 模型」会逐行列出缺哪个文件并给下载按钮，下载落在
-`%APPDATA%\portrait-lab\models`（可用 `PORTRAIT_MODELS_DIR` 指定自定义盘位）。
+「AI 修图 → 模型」会逐行列出缺哪个文件并给下载按钮，下载落在**软件安装文件夹的 `models`**
+（安装目录不可写时回退 `%APPDATA%\XPhoto\models`；可用 `PORTRAIT_MODELS_DIR` 指定自定义盘位）。
 
 **导出尺寸和预期不一样？**
 导出始终按载入的原图分辨率重算，跟屏幕缩放无关。两种情况会变小：载入的是 RAW 内嵌预览
@@ -314,6 +338,18 @@ PNG 无损或 JPEG，编码格式跟随你选的后缀（选 `.jpg` 就真的是
 注意全身肤色是整幅统一处理，仍会覆盖到关掉的脸——否则那张脸上会留一块色差。
 
 ## 版本记录
+
+### v1.1.10
+
+- 同一次发布覆盖 **Windows / Linux / macOS 的 x64 与 ARM64，共 12 个安装包**，全部进入正式版
+  （`/releases/latest` 指向它），不再只放在实验性预发布里。
+- 安装包命名统一为 `XPhoto-<版本>-<平台>-<架构>.<扩展名>`。Windows 从 `XPhoto Setup <版本>.exe`
+  改为 `XPhoto-1.1.10-win-x64.exe`，与其余平台一致。
+- 自动更新扩成三档：Windows NSIS 后台静默下载、下次启动安装；Linux AppImage 原地原子替换后重启；
+  macOS 与 Linux 的 deb / tar.gz 只提示并打开下载页。更新清单按平台分别挑包。
+- 两个 dmg 在 macOS 15.8.3 虚拟机里用 `hdiutil` 生成并通过 `hdiutil verify`；两个 AppImage 在
+  Deepin 25 虚拟机里用 `mksquashfs` + 官方 type2 runtime 生成，x64 包已实机启动验证。
+- 新增一页客户版 [下载选择说明](docs/XPhoto-版本选择说明.html)：一句话告诉客户选哪个包。
 
 ### v1.1.9
 
@@ -373,6 +409,7 @@ npm test           # 全量回归（数百项像素级断言，含 i18n / 打包
 
 | 文档 | 内容 |
 | --- | --- |
+| [`docs/XPhoto-版本选择说明.html`](docs/XPhoto-版本选择说明.html) | 一页客户版下载指引：一句话告诉客户选哪个包 |
 | [`docs/DEV-NOTES.md`](docs/DEV-NOTES.md) | 开发笔记：每项功能的实测数据、踩过的坑、算法取舍 |
 | [`docs/XPhoto-使用手册.html`](docs/XPhoto-使用手册.html) | 完整使用手册（18 章，可离线打开、可打印） |
 | [`docs/i18n-plan.md`](docs/i18n-plan.md) | 8 语界面方案与脚本 |
